@@ -4,6 +4,8 @@ import 'package:counter_app_with_bloc_cuibit/cubit/counter.cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'increment_decrement.widget.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -31,22 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            onPressed: () => counterCubit.increment(),
-            tooltip: 'Increment',
-            child: const Icon(Icons.plus_one),
-          ),
-          const SizedBox(height: 20),
-          FloatingActionButton(
-            onPressed: () => counterCubit.decrement(),
-            tooltip: 'Decrement',
-            child: const Icon(Icons.exposure_minus_1),
-          ),
-        ],
-      ),
+      floatingActionButton:
+          IncrementDecrementWidget(counterCubit: counterCubit),
     );
   }
 
