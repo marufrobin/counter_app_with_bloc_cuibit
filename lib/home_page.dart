@@ -16,7 +16,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final counter = counterCubit.state;
     log(name: "--> ", "Checking if full build");
     return Scaffold(
       appBar: _appBar(context),
@@ -38,13 +37,13 @@ class _MyHomePageState extends State<MyHomePage> {
           FloatingActionButton(
             onPressed: () => counterCubit.increment(),
             tooltip: 'Increment',
-            child: const Icon(Icons.add),
+            child: const Icon(Icons.plus_one),
           ),
           const SizedBox(height: 20),
           FloatingActionButton(
             onPressed: () => counterCubit.decrement(),
             tooltip: 'Decrement',
-            child: const Icon(Icons.minimize),
+            child: const Icon(Icons.exposure_minus_1),
           ),
         ],
       ),
