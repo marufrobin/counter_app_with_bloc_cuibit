@@ -88,12 +88,13 @@ In the `main.dart` file
       ),
     )
 ```
-
+---
 ```dart
 /// [CounterCubit] class can be used as a singleton from any where in the app
     final counterCubit = BlocProvider.of<CounterCubit>(context);
 ```
-
+---
+In the `MyHomePage` class
 ```dart
 /// My home page
   @override
@@ -111,7 +112,8 @@ In the `main.dart` file
 
   }
 ```
-
+---
+In the `MyIncrementDecrementWidget` class
 ```dart
 /// My Increment Decrement Widget
 @override
