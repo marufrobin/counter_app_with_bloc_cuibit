@@ -2,6 +2,12 @@
 
 POC(Proof of Concept) Counter app using BOLC and Cuibit with Clean Architecture SOLID
 
+## Table of Contents
+
+- [Cubit State management](#cubit-state-management)
+- [Cubit State management with BlocBuilder](#cubit-state-management-with-blocbuilder)
+- [Cubit State management with BlocProvider](#cubit-state-management-with-blocprovider)
+
 ## Cubit State management
 
 First we need to create a Cubit State management class
