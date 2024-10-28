@@ -6,19 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'increment_decrement.widget.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final counterCubit = CounterCubit();
 
   @override
   Widget build(BuildContext context) {
     log(name: "--> ", "Checking if full build");
+    final counterCubit = BlocProvider.of<CounterCubit>(context);
     return Scaffold(
       appBar: _appBar(context),
       body: BlocBuilder<CounterCubit, int>(
@@ -33,7 +27,15 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: const IncrementDecrementWidget(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const IncrementDecrementWidget(),
+          ));
+        },
+        tooltip: "Next page",
+        child: const Icon(Icons.navigate_next),
+      ),
     );
   }
 
