@@ -1,4 +1,4 @@
-# counter_app_with_bloc_cuibit
+# Counter App with Bloc and Cuibit
 
 POC(Proof of Concept) Counter app using BOLC and Cuibit with Clean Architecture SOLID
 
