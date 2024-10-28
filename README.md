@@ -2,15 +2,132 @@
 
 POC(Proof of Concept) Counter app using BOLC and Cuibit with Clean Architecture SOLID
 
-## Getting Started
+## Cubit State management
 
-This project is a starting point for a Flutter application.
+First we need to create a Cubit State management class
 
-A few resources to get you started if this is your first Flutter project:
+```dart
+class CounterCubit extends Cubit<int> {
+  CounterCubit() : super(5);
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  void increment() {
+    log(name: "Before: ", state.toString());
+    emit(state + 1);
+    log(name: "After: ", state.toString());
+  }
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  void decrement() {
+    log(name: "Before: ", state.toString());
+    emit(state > 0 ? state - 1 : state);
+    log(name: "After: ", state.toString());
+  }
+}
+```
+
+## Cubit State management with BlocBuilder
+
+Now we need to create a Cubit State management with BlocBuilder
+
+```dart
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  final counterCubit = CounterCubit();
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      body: BlocBuilder<CounterCubit, int>(
+        bloc: counterCubit,
+        builder: (context, state) {
+          return Center(
+            child: Text('Count: $state'),
+          );
+        },
+      ),
+      floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              onPressed: () => counterCubit.increment(),
+              tooltip: 'Increment',
+              child: const Icon(Icons.plus_one),
+            ),
+            const SizedBox(height: 20),
+            FloatingActionButton(
+              onPressed: () => counterCubit.decrement(),
+              tooltip: 'Decrement',
+              child: const Icon(Icons.exposure_minus_1),
+            ),
+          ],
+        ),
+    );
+  }
+}
+```
+
+## Cubit State management with BlocProvider
+
+Now we need to create a Cubit State management with BlocProvider
+
+In the `main.dart` file
+
+```dart
+ BlocProvider(
+      create: (context) => CounterCubit(),
+      child: MaterialApp(
+        title: 'Counter App with Bloc and Cuibit',
+        home: const MyHomePage(),
+      ),
+    )
+```
+
+```dart
+/// [CounterCubit] class can be used as a singleton from any where in the app
+    final counterCubit = BlocProvider.of<CounterCubit>(context);
+```
+
+```dart
+/// My home page
+  @override
+  Widget build(BuildContext context) {
+    final counterCubit = BlocProvider.of<CounterCubit>(context);
+    return Scaffold(
+      body: BlocBuilder<CounterCubit, int>(
+        bloc: counterCubit,
+        builder: (context, state) {
+          return Center(
+            child: Text('Count: $state'),
+          );
+        },
+      ),
+
+  }
+```
+
+```dart
+/// My Increment Decrement Widget
+@override
+  Widget build(BuildContext context) {
+    final counterCubit = BlocProvider.of<CounterCubit>(context);
+    return Scaffold(
+      body:  Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              onPressed: () => counterCubit.increment(),
+              tooltip: 'Increment',
+              child: const Icon(Icons.plus_one),
+            ),
+            const SizedBox(height: 20),
+            FloatingActionButton(
+              onPressed: () => counterCubit.decrement(),
+              tooltip: 'Decrement',
+              child: const Icon(Icons.exposure_minus_1),
+            ),
+          ],
+        ),
+    );
+  }
+```
