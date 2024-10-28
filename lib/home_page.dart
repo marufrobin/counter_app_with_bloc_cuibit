@@ -33,8 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton:
-          IncrementDecrementWidget(counterCubit: counterCubit),
+      floatingActionButton: const IncrementDecrementWidget(),
     );
   }
 
