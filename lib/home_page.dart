@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:counter_app_with_bloc_cuibit/cubit/counter.cubit.dart';
+import 'package:counter_app_with_bloc_cuibit/bloc/counter.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,22 +12,23 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     log(name: "--> ", "Checking if full build");
-    final counterCubit = BlocProvider.of<CounterCubit>(context);
+
     return Scaffold(
-      appBar: _appBar(context),
-      body: BlocBuilder<CounterCubit, int>(
-        bloc: counterCubit,
-        builder: (context, state) {
-          return Center(
-            child: Text(
-              'Count: $state',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          );
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
+        appBar: _appBar(context),
+        body: BlocBuilder<CounterBloc, int>(
+          // bloc: counterBloc,
+          builder: (context, state) {
+            return Center(
+              child: Text(
+                'Count: $state',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            );
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: const IncrementDecrementWidget()
+        /*FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const IncrementDecrementWidget(),
@@ -35,8 +36,8 @@ class MyHomePage extends StatelessWidget {
         },
         tooltip: "Next page",
         child: const Icon(Icons.navigate_next),
-      ),
-    );
+      ),*/
+        );
   }
 
   AppBar _appBar(BuildContext context) {
