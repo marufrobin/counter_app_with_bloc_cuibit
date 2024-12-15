@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="counter_app_with_bloc_cuibit"
+        android:label="Counter App B&amp;C"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
