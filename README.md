@@ -88,13 +88,18 @@ In the `main.dart` file
       ),
     )
 ```
+
 ---
+
 ```dart
 /// [CounterCubit] class can be used as a singleton from any where in the app
     final counterCubit = BlocProvider.of<CounterCubit>(context);
 ```
+
 ---
+
 In the `MyHomePage` class
+
 ```dart
 /// My home page
   @override
@@ -112,8 +117,11 @@ In the `MyHomePage` class
 
   }
 ```
+
 ---
+
 In the `MyIncrementDecrementWidget` class
+
 ```dart
 /// My Increment Decrement Widget
 @override
@@ -138,4 +146,39 @@ In the `MyIncrementDecrementWidget` class
         ),
     );
   }
+```
+
+# Counter state management with Bloc
+
+`CounterBloc` class extends `Bloc` class
+
+```dart
+class CounterBloc extends Bloc<CounterEvent, int> {
+  CounterBloc() : super(0);
+
+  @override
+  Stream<int> mapEventToState(CounterEvent event) async* {
+    if (event is Increment) {
+      yield state + 1;
+    } else if (event is Decrement) {
+      yield state - 1;
+    }
+  }
+}
+```
+
+`CounterEvent` class is a sealed class with two subclasses `Increment` and `Decrement`
+In `Bloc` Event is the input and what will happened in their and State is the output
+
+`CounterEvent` class
+
+```dart
+part of 'counter.bloc.dart';
+
+sealed class CounterEvent {}
+
+final class CounterIncremented extends CounterEvent {}
+
+final class CounterDecremented extends CounterEvent {}
+
 ```
